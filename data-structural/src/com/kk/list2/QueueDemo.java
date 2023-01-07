@@ -8,9 +8,9 @@ import com.kk.exception.OperationException;
  * @Date           2023/1/6 0:36
  * @Description    some description
  */
-public class QueueDemo<T> {
+public class QueueDemo<E> {
 
-    private T[] data;    // 元素空间
+    private E[] data;    // 元素空间
     private int size;    // 有效元素个数
     public int putIndex; // 队尾指针
 
@@ -19,7 +19,7 @@ public class QueueDemo<T> {
             if (capacity <= 0 ) {
                 throw new OperationException(ExceptionEnum.INIT_PARAM_NOT_ILLEGAL.getMsg());
             }
-            this.data = (T[]) new Object[capacity];
+            this.data = (E[]) new Object[capacity];
             this.size = 0;
             this.putIndex = -1;
         } catch (OperationException e) {
@@ -32,7 +32,7 @@ public class QueueDemo<T> {
     }
 
     // 查看队首元素
-    public T peekHead() {
+    public E peekHead() {
         try {
             if (size == 0) {
                 throw new OperationException(ExceptionEnum.QUEUE_UNDER_FLOW.getMsg());
@@ -44,7 +44,7 @@ public class QueueDemo<T> {
     }
 
     // 查看队尾元素
-    public T peekTail() {
+    public E peekTail() {
         try {
             if (size == 0) {
                 throw new OperationException(ExceptionEnum.QUEUE_UNDER_FLOW.getMsg());
@@ -56,12 +56,12 @@ public class QueueDemo<T> {
     }
 
     // 入队
-    public void push(T t) {
+    public void push(E elem) {
         try {
             if (size == data.length) {
                 throw new OperationException(ExceptionEnum.QUEUE_OVER_FLOW.getMsg());
             }
-            data[++putIndex] = t;
+            data[++putIndex] = elem;
             size++;
         } catch (OperationException e) {
             e.printStackTrace();
@@ -69,7 +69,7 @@ public class QueueDemo<T> {
     }
 
     // 出队
-    public T poll() {
+    public E poll() {
         try {
             if (size == 0) {
                 throw new OperationException(ExceptionEnum.QUEUE_UNDER_FLOW.getMsg());
@@ -77,7 +77,7 @@ public class QueueDemo<T> {
         } catch (OperationException e) {
             e.printStackTrace();
         }
-        T elem = data[0];
+        E elem = data[0];
         for(int i = 0; i < size; i++){
             data[i] = data[i+1];
         }
