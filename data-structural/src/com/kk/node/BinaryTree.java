@@ -6,7 +6,7 @@ import java.util.Queue;
 /**
  * @author         kk
  * @Date           2023/1/8 14:23
- * @Description    判断二叉树是否是完全二叉树
+ * @Description    二叉树实例及算法
  */
 public class BinaryTree {
 
@@ -19,14 +19,38 @@ public class BinaryTree {
         TreeNode<Integer> f = new TreeNode<>(6);
         TreeNode<Integer> g = new TreeNode<>(7);
         TreeNode<Integer> h = new TreeNode<>(8);
-        a.setLeft(b);
-        a.setRight(c);
-        b.setLeft(d);
-        b.setRight(e);
-        c.setLeft(f);
-        c.setRight(g);
-        d.setLeft(h);
-        System.out.println(isCompleteBinaryTree(a));
+        d.setLeft(b);
+        d.setRight(f);
+        b.setLeft(a);
+        b.setRight(c);
+        f.setLeft(e);
+        f.setRight(h);
+        h.setLeft(g);
+
+//        a.setLeft(b);
+//        a.setRight(c);
+//        b.setLeft(d);
+//        b.setRight(e);
+//        c.setLeft(f);
+//        c.setRight(g);
+//        d.setLeft(h);
+
+//        System.out.println(isCompleteBinaryTree(a));
+
+//        preVisitor(a);
+//        System.out.println();
+//        middleVisitor(a);
+//        System.out.println();
+//        afterVisitor(a);
+//        System.out.println();
+
+//        int[] pre = {1, 2, 4, 7, 3, 5, 6, 8};
+//        int[] mid = {4, 7, 2, 1, 5, 3, 8, 6};
+//        TreeNode<Integer> tree = getTree(pre, mid);
+//        preVisitor(tree);
+//        System.out.println();
+
+        isContainsK(d, 7);
     }
 
     /**
@@ -119,6 +143,89 @@ public class BinaryTree {
         }
         return true;
     }
+
+    // 先序遍历
+    public static void preVisitor(TreeNode<?> tree) {
+        if (tree != null) {
+            System.out.print(tree.getRoot() + "  ");
+            preVisitor(tree.getLeft());
+            preVisitor(tree.getRight());
+        }
+    }
+
+    // 中序遍历
+    public static void middleVisitor(TreeNode<?> tree){
+        if (tree != null) {
+            middleVisitor(tree.getLeft());
+            System.out.print(tree.getRoot() + "  ");
+            middleVisitor(tree.getRight());
+        }
+    }
+
+    // 后序遍历
+    public static void afterVisitor(TreeNode<?> tree){
+        if (tree != null) {
+            afterVisitor(tree.getLeft());
+            afterVisitor(tree.getRight());
+            System.out.print(tree.getRoot() + "  ");
+        }
+    }
+
+    // 根据先序遍历、中序遍历结果构造二叉树
+    public static TreeNode<Integer> getTree(int[] pre, int[] mid){
+        if (pre.length != mid.length) {
+            return null;
+        }
+        TreeNode<Integer> tree = new TreeNode<>(pre[0]);
+        if (pre.length == 1) {
+            return tree;
+        }
+        for (int i = 0; i < mid.length; i++)  {
+            if (mid[i] == pre[0]) {
+                // 构建左树
+                if (i == 0) { // 没有左树
+                    tree.setLeft(null);
+                } else {
+                    int[] pre_left = new int[i];
+                    int[] mid_left = new int[i];
+                    for (int j = 0; j < i; j++) {
+                        pre_left[j] = pre[j+1];
+                        mid_left[j] = mid[j];
+                    }
+                    tree.setLeft(getTree(pre_left, mid_left));
+                }
+                // 构建右树
+                if (i + 1 == mid.length) { // 没有右树
+                    tree.setRight(null);
+                } else {
+                    int[] pre_right = new int[mid.length-1-i];
+                    int[] mid_right = new int[mid.length-1-i];
+                    for (int j = 0; j < mid.length -1 - i; j++) {
+                        pre_right[j] = pre[j+mid.length-1-i];
+                        mid_right[j] = mid[j+mid.length-1-i];
+                    }
+                    tree.setRight(getTree(pre_right, mid_right));
+                }
+            }
+        }
+        return tree;
+    }
+
+    // BST中里面是否含有某节点
+    public static void isContainsK(TreeNode<Integer> tree, Integer k) {
+        if (tree != null) {
+            if (k.equals(tree.getRoot())) {
+                System.out.println("二叉树中包含值为" + k + "的节点");
+            } else if (k > tree.getRoot()) {
+                isContainsK(tree.getRight(), k);
+            } else if (k < tree.getRoot()) {
+                isContainsK(tree.getLeft(), k);
+            }
+        } else {
+            System.out.println("二叉树中没有值为" + k + "的节点");
+        }
+    }
+
 }
 
 class TreeNode<E> {
