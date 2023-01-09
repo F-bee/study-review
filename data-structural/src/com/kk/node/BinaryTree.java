@@ -1,7 +1,6 @@
 package com.kk.node;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * @author         kk
@@ -10,48 +9,8 @@ import java.util.Queue;
  */
 public class BinaryTree {
 
-    public static void main(String[] args) {
-        TreeNode<Integer> a = new TreeNode<>(1);
-        TreeNode<Integer> b = new TreeNode<>(2);
-        TreeNode<Integer> c = new TreeNode<>(3);
-        TreeNode<Integer> d = new TreeNode<>(4);
-        TreeNode<Integer> e = new TreeNode<>(5);
-        TreeNode<Integer> f = new TreeNode<>(6);
-        TreeNode<Integer> g = new TreeNode<>(7);
-        TreeNode<Integer> h = new TreeNode<>(8);
-        d.setLeft(b);
-        d.setRight(f);
-        b.setLeft(a);
-        b.setRight(c);
-        f.setLeft(e);
-        f.setRight(h);
-        h.setLeft(g);
-
-//        a.setLeft(b);
-//        a.setRight(c);
-//        b.setLeft(d);
-//        b.setRight(e);
-//        c.setLeft(f);
-//        c.setRight(g);
-//        d.setLeft(h);
-
-//        System.out.println(isCompleteBinaryTree(a));
-
-//        preVisitor(a);
-//        System.out.println();
-//        middleVisitor(a);
-//        System.out.println();
-//        afterVisitor(a);
-//        System.out.println();
-
-//        int[] pre = {1, 2, 4, 7, 3, 5, 6, 8};
-//        int[] mid = {4, 7, 2, 1, 5, 3, 8, 6};
-//        TreeNode<Integer> tree = getTree(pre, mid);
-//        preVisitor(tree);
-//        System.out.println();
-
-        isContainsK(d, 7);
-    }
+    // 用于判断一棵树是否是BST时，接收中序遍历结果
+    static List<Integer> list = new ArrayList<>();
 
     /**
      * 判断一棵二叉树是否是完全二叉树
@@ -226,6 +185,62 @@ public class BinaryTree {
         }
     }
 
+    // 已知BST的先序遍历结果，构建BST
+    public static TreeNode<Integer> buildBST(List<Integer> list) {
+        if (list.size() == 0) {
+            return null;
+        }
+        TreeNode<Integer> tree = new TreeNode<>(list.get(0));
+        if (list.size() == 1) {
+            return tree;
+        }
+        List<Integer> left = new ArrayList<>();
+        List<Integer> right = new ArrayList<>();
+        int i = 1;
+        while (i < list.size() && list.get(i) < list.get(0)) {
+            left.add(list.get(i));
+            i++;
+        }
+        tree.setLeft(buildBST(left));
+        for (int j = i; j < list.size(); j++) {
+            right.add(list.get(j));
+        }
+        tree.setRight(buildBST(right));
+        return tree;
+    }
+
+    /*
+     判断一棵树是不是BST
+       方法一：
+         找出左树上最大的节点判断是否小于根，右树上最小的节点是否大于根，对左右子树递归地进行判断
+       方法二：
+         输出中序遍历的结果，判断是否升序
+     */
+    public static List<Integer> validBST(TreeNode<Integer> tree) {
+        if (tree == null) {
+            return null;
+        }
+        if (tree.getLeft() != null) {
+            validBST(tree.getLeft());
+        }
+        if (tree.getRoot() != null) {
+            list.add(tree.getRoot());
+        }
+        if (tree.getRight() != null) {
+            validBST(tree.getRight());
+        }
+        return list;
+    }
+
+    // 判断list中元素是否为升序排列
+    public static boolean isAsc(List<Integer> list) {
+        for (int i = 0; i < list.size() - 1; i++) {
+            if (list.get(i) > list.get(i+1)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
 class TreeNode<E> {
