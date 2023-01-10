@@ -86,8 +86,10 @@ public class BinaryTree {
             if (leftLeaf == null && rightLeaf != null) {
                 return false;
             }
-            // 度为1或0的节点之后的节点如果还有孩子，则不是完全二叉树
-            // 此处仅判断左子树是否为空，因为前一处判断已确定了右子树不为空时左子树一定有值
+            /*
+             度为1或0的节点之后的节点如果还有孩子，则不是完全二叉树
+             此处仅判断左子树是否为空，因为前一处判断已确定了右子树不为空时左子树一定有值
+             */
             if (flag && leftLeaf != null) {
                 return false;
             }
@@ -241,6 +243,33 @@ public class BinaryTree {
         }
         return true;
     }
+
+    // AVL 左旋
+    public static TreeNode<Integer> rotateLeft(TreeNode<Integer> tree) {
+        // 新的根节点为原根节点的右孩子
+        TreeNode<Integer> newRoot = tree.getRight();
+        // 原根节点右孩子的左子树成为原根节点的右子树
+        TreeNode<Integer> temp = tree.getRight().getLeft();
+        tree.getRight().setLeft(null);
+        tree.setRight(temp);
+        // 原根节点变为新的根节点的左子树
+        newRoot.setLeft(tree);
+        return newRoot;
+    }
+
+    // AVL 右旋
+    public static TreeNode<Integer> rotateRight(TreeNode<Integer> tree) {
+        // 新的根节点为原根节点的左孩子
+        TreeNode<Integer> newRoot = tree.getLeft();
+        // 原根节点左孩子的右子树成为原根节点的左子树
+        TreeNode<Integer> temp = tree.getLeft().getRight();
+        tree.getLeft().setRight(null);
+        tree.setLeft(temp);
+        // 原根节点变为新的根节点的右子树
+        newRoot.setRight(tree);
+        return newRoot;
+    }
+
 }
 
 class TreeNode<E> {
