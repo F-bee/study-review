@@ -270,15 +270,37 @@ public class BinaryTree {
         return newRoot;
     }
 
+    // 构建哈夫曼树
+    public static TreeNode<Character> creatHuffmanTree(List<TreeNode<Character>> list){
+        while (list.size() > 1) {
+            Collections.sort(list);
+            TreeNode<Character> left = list.get(list.size() - 1);
+            TreeNode<Character> right = list.get(list.size() - 2);
+            TreeNode<Character> root = new TreeNode<>(null, left.getWeight() + right.getWeight());
+            root.setLeft(left);
+            root.setRight(right);
+            list.remove(list.size() - 1);
+            list.remove(list.size() - 1);
+            list.add(root);
+        }
+        return list.get(0);
+    }
+
 }
 
-class TreeNode<E> {
+class TreeNode<E> implements Comparable{
     private E root;
     private TreeNode<E> left;
     private TreeNode<E> right;
+    private Integer weight; // 权重，HuffmanTree 使用
 
     public TreeNode(E root) {
         this.root = root;
+    }
+
+    public TreeNode(E root, Integer weight) {
+        this.root = root;
+        this.weight = weight;
     }
 
     public TreeNode() {}
@@ -307,12 +329,40 @@ class TreeNode<E> {
         this.right = right;
     }
 
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
     @Override
     public String toString() {
+        if (this.weight != null) {
+            return "HuffmanTree{" +
+                    "weight=" + weight +
+                    ", root=" + root +
+                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
+        }
         return "Tree{" +
                 "root=" + root +
                 ", left=" + left +
                 ", right=" + right +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        TreeNode<E> other = (TreeNode<E>) o;
+        if(other.weight > this.weight){
+            return 1;
+        }
+        if(other.weight < this.weight){
+            return -1;
+        }
+        return 0;
     }
 }

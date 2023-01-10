@@ -1,6 +1,9 @@
 package com.kk.node;
 
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -94,21 +97,42 @@ public class Test {
 //        System.out.println(tree);
 
         // LR 先左旋再右旋
-        TreeNode<Integer> tree10=new TreeNode<>(10);
-        TreeNode<Integer> tree15=new TreeNode<>(15);
-        TreeNode<Integer> tree7=new TreeNode<>(7);
-        TreeNode<Integer> tree8=new TreeNode<>(8);
-        TreeNode<Integer> tree4=new TreeNode<>(4);
-        TreeNode<Integer> tree5=new TreeNode<>(5);
-        tree4.setRight(tree5);
-        tree7.setRight(tree4);
-        tree7.setLeft(tree8);
-        tree10.setLeft(tree7);
-        tree10.setRight(tree15);
-        tree10.setLeft(BinaryTree.rotateLeft(tree10.getLeft()));
-        System.out.println(tree10);
-        TreeNode<Integer> tree = BinaryTree.rotateRight(tree10);
-        System.out.println(tree);
+//        TreeNode<Integer> tree10=new TreeNode<>(10);
+//        TreeNode<Integer> tree15=new TreeNode<>(15);
+//        TreeNode<Integer> tree7=new TreeNode<>(7);
+//        TreeNode<Integer> tree8=new TreeNode<>(8);
+//        TreeNode<Integer> tree4=new TreeNode<>(4);
+//        TreeNode<Integer> tree5=new TreeNode<>(5);
+//        tree4.setRight(tree5);
+//        tree7.setRight(tree4);
+//        tree7.setLeft(tree8);
+//        tree10.setLeft(tree7);
+//        tree10.setRight(tree15);
+//        tree10.setLeft(BinaryTree.rotateLeft(tree10.getLeft()));
+//        System.out.println(tree10);
+//        TreeNode<Integer> tree = BinaryTree.rotateRight(tree10);
+//        System.out.println(tree);
+
+        // 构造哈夫曼树
+//        TreeNode<Character> huffmanTree33 = new TreeNode<>('F', 33);
+//        TreeNode<Character> huffmanTree45D = new TreeNode<>('D', 45);
+//        TreeNode<Character> huffmanTree145 = new TreeNode<>('A', 145);
+//        TreeNode<Character> huffmanTree25 = new TreeNode<>('G', 25);
+//        TreeNode<Character> huffmanTree8 = new TreeNode<>('P', 8);
+//        TreeNode<Character> huffmanTree45E = new TreeNode<>('E', 45);
+//        TreeNode<Character> huffmanTree38 = new TreeNode<>('B', 38);
+//        TreeNode<Character> huffmanTree1 = new TreeNode<>('Z', 1);
+//        List<TreeNode<Character>> list = new ArrayList<>();
+//        list.add(huffmanTree33);
+//        list.add(huffmanTree45D);
+//        list.add(huffmanTree145);
+//        list.add(huffmanTree25);
+//        list.add(huffmanTree8);
+//        list.add(huffmanTree45E);
+//        list.add(huffmanTree38);
+//        list.add(huffmanTree1);
+//        TreeNode<Character> tree = BinaryTree.creatHuffmanTree(list);
+//        System.out.println(tree);
 
     }
 }
