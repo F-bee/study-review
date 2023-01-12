@@ -135,25 +135,33 @@ public class Test {
 //        System.out.println(tree);
 
         // 大根堆
-        MaxHeap<Integer> maxHeap = new MaxHeap<>();
-        maxHeap.insert(7);
-        maxHeap.insert(5);
-        maxHeap.insert(4);
-        maxHeap.insert(3);
-        maxHeap.insert(2);
-        maxHeap.insert(1);
+//        MaxHeap<Integer> maxHeap = new MaxHeap<>();
+//        maxHeap.insert(7);
+//        maxHeap.insert(5);
+//        maxHeap.insert(4);
+//        maxHeap.insert(3);
+//        maxHeap.insert(2);
+//        maxHeap.insert(1);
 //        System.out.println(maxHeap);
 //        maxHeap.insert(6);
 //        System.out.println(maxHeap);
 //        maxHeap.delete(0);
 //        System.out.println(maxHeap);
-        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(maxHeap);
-        priorityQueue.push(6);
-        System.out.println(maxHeap);
-        System.out.println(priorityQueue.peekFirst());
-        System.out.println(priorityQueue.peekLast());
-        System.out.println(priorityQueue.pop());
-        System.out.println(priorityQueue.pop());
-        System.out.println(maxHeap);
+        // 优先队列
+//        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(maxHeap);
+//        priorityQueue.push(6);
+//        System.out.println(maxHeap);
+//        System.out.println(priorityQueue.peekFirst());
+//        System.out.println(priorityQueue.peekLast());
+//        System.out.println(priorityQueue.pop());
+//        System.out.println(priorityQueue.pop());
+//        System.out.println(maxHeap);
+
+        // 线段树
+        Integer[] arr = {12, 7, 6, 5, 4};
+        SegmentTree<Integer> segmentTree =  new SegmentTree<>(arr, (a, b) -> a + b);
+        System.out.println(segmentTree);
+        System.out.println(segmentTree.queryArea(1, 3));
+        System.out.println(segmentTree.queryArea(2, 4));
     }
 }
