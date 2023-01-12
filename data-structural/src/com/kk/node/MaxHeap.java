@@ -66,13 +66,39 @@ public class MaxHeap <E extends Comparable<E>> {
     // 堆中最大值
     public E findMax() {
         try {
-            if (size > 0) {
+            if (size <= 0) {
                 throw new OperationException(ExceptionEnum.HEAP_IS_NULL.getMsg());
             }
         } catch (OperationException e) {
             e.printStackTrace();
         }
         return data[0];
+    }
+
+    // 查看数组最后一个值
+    public E findLast() {
+        try {
+            if (size <= 0) {
+                throw new OperationException(ExceptionEnum.HEAP_IS_NULL.getMsg());
+            }
+        } catch (OperationException e) {
+            e.printStackTrace();
+        }
+        return data[size-1];
+    }
+
+    // 取出最大值
+    public E getMax() {
+        try {
+            if (size <= 0) {
+                throw new OperationException(ExceptionEnum.HEAP_IS_NULL.getMsg());
+            }
+        } catch (OperationException e) {
+            e.printStackTrace();
+        }
+        E temp = data[0];
+        delete(0);
+        return temp;
     }
 
     // 上浮

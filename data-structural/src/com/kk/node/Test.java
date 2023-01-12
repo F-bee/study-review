@@ -142,10 +142,18 @@ public class Test {
         maxHeap.insert(3);
         maxHeap.insert(2);
         maxHeap.insert(1);
+//        System.out.println(maxHeap);
+//        maxHeap.insert(6);
+//        System.out.println(maxHeap);
+//        maxHeap.delete(0);
+//        System.out.println(maxHeap);
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(maxHeap);
+        priorityQueue.push(6);
         System.out.println(maxHeap);
-        maxHeap.insert(6);
-        System.out.println(maxHeap);
-        maxHeap.delete(0);
+        System.out.println(priorityQueue.peekFirst());
+        System.out.println(priorityQueue.peekLast());
+        System.out.println(priorityQueue.pop());
+        System.out.println(priorityQueue.pop());
         System.out.println(maxHeap);
     }
 }
