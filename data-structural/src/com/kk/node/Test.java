@@ -134,5 +134,18 @@ public class Test {
 //        TreeNode<Character> tree = BinaryTree.creatHuffmanTree(list);
 //        System.out.println(tree);
 
+        // 大根堆
+        MaxHeap<Integer> maxHeap = new MaxHeap<>();
+        maxHeap.insert(7);
+        maxHeap.insert(5);
+        maxHeap.insert(4);
+        maxHeap.insert(3);
+        maxHeap.insert(2);
+        maxHeap.insert(1);
+        System.out.println(maxHeap);
+        maxHeap.insert(6);
+        System.out.println(maxHeap);
+        maxHeap.delete(0);
+        System.out.println(maxHeap);
     }
 }

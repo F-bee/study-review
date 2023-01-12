@@ -10,6 +10,7 @@ public enum ExceptionEnum {
     QUEUE_OVER_FLOW(108, "队列已满"),
     QUEUE_UNDER_FLOW(109, "队列为空"),
     LINKED_LIST_IS_NULL(110, "链表为空"),
+    HEAP_IS_NULL(111, "堆为空"),
     NO_EXTRA_SPACE(201, "没有空余空间，添加失败"),
     INIT_PARAM_NOT_ILLEGAL(202, "初始化空间参数不合法"),
     ;
