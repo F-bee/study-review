@@ -12,7 +12,7 @@ public class StringQuestions {
 //        System.out.println(reverseString2(str, 0, str.length() - 1));
 //        System.out.println(reverseString2(str, 2, 5));
 
-        String str = "abcdedcabccba";
+        String str = "abcccbaabcdedcabccba";
         System.out.println(lengthOfMaxPalindromeSubString(str));
     }
 
@@ -65,25 +65,27 @@ public class StringQuestions {
             return 0;
         }
         int max = 0;
-        int current = 0;
+        int current1 = 0;
+        int current2 = 0;
         int length = str.length();
+        // str.charAt(i) 为中点
         for (int i = 0; i < length; i++) {
             // 长度为奇数的情况
-            for (int j = 0; (i - j) > 0 && (i + j) < length; j++) {
+            for (int j = 0; (i - j) >= 0 && (i + j) < length; j++) {
                 if (str.charAt(i - j) != str.charAt(i + j)) {
                     break;
                 }
-                current = 2 * j + 1;
+                current1 = 2 * j + 1;
             }
             // 长度为偶数的情况
-            for (int j = 0; (i - j) > 0 && (i + j + 1) < length; j++) {
+            for (int j = 0; (i - j) >= 0 && (i + j + 1) < length; j++) {
                 if (str.charAt(i - j) != str.charAt(i + j + 1)) {
                     break;
                 }
-                current = 2 * j + 2;
+                current2 = 2 * j + 2;
             }
-            if (current > max) {
-                max = current;
+            if (current1 > max || current2 > max) {
+                max = Math.max(current1, current2);
             }
         }
         return max;
