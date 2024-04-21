@@ -1,5 +1,7 @@
 package com.kk.entity;
 
+import java.util.Objects;
+
 public class LinkedListNode {
     private Integer data;
     private LinkedListNode next;
@@ -25,5 +27,22 @@ public class LinkedListNode {
 
     public void setNext(LinkedListNode next) {
         this.next = next;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LinkedListNode that = (LinkedListNode) o;
+        return Objects.equals(data, that.data) && Objects.equals(next, that.next);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(data, next);
     }
 }
